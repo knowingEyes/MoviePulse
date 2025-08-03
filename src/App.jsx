@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import NavBar from "./NavBar";
 import HeroBanner from "./HeroBanner";
 import Header from "./components/AppHeader";
 
 function App() {
   return (
-    <div className="container">
+    <div className="bg-[#121212] h-screen">
+      <Header />
       <HeroBanner />
-      <Header/>
+      <NavBar />
     </div>
   );
 }
