@@ -7,12 +7,10 @@ export default function HeroBanner() {
   useEffect(function () {
     async function getTrendingMovie() {
       const trendingMovie = await fetchMovies();
-      setPoularMovie(trendingMovie.results[14]
-      );
+      setPoularMovie(trendingMovie.results[7]);
     }
     getTrendingMovie();
   }, []);
-  console.log(popularMovie);
 
   return (
     <section
