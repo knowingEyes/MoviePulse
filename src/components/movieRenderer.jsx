@@ -1,4 +1,3 @@
-
 export default function RenderMovies({ maxLength = 5, moviesResults, title }) {
   // const [onHoverId, setIsHoverId] = useState(574475);
   const baseImdbUrl = `https://image.tmdb.org/t/p/original`;
@@ -15,7 +14,7 @@ export default function RenderMovies({ maxLength = 5, moviesResults, title }) {
             <div className="w-[150px] rounded-md overflow-hidden">
               {/* {result?.id === onHoverId && (
                 <div className="bg-[#1a1a1a]/40 absolute inset-0 flex items-center justify-center text-center">
-                  <p className=" text-white font-extrabold">{result.title}</p>
+                  <p className=" text-white font-extrabold">{result.title}</p> 
                 </div>
               )} */}
               <div>
