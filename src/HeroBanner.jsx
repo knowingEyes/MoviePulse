@@ -1,13 +1,13 @@
-import fetchMovies from "./api";
+import { fetchMoviesByCategory } from "./api";
 import { useEffect, useState } from "react";
 
 export default function HeroBanner() {
   const [popularMovie, setPoularMovie] = useState("");
-  const imgUrl = `https://image.tmdb.org/t/p/w500${popularMovie.poster_path}`;
+  const imgUrl = `https://image.tmdb.org/t/p/original${popularMovie.poster_path}`;
   useEffect(function () {
     async function getTrendingMovie() {
-      const trendingMovie = await fetchMovies();
-      setPoularMovie(trendingMovie.results[7]);
+      const trendingMovie = await fetchMoviesByCategory("now_playing");
+      setPoularMovie(trendingMovie.results[9]);
     }
     getTrendingMovie();
   }, []);
