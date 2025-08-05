@@ -7,20 +7,22 @@ import RomanceMovies from "./genre/Romance";
 import ThrillerMovies from "./genre/Thriller";
 import ComedyMovies from "./genre/Comedy";
 import ActionMovies from "./genre/Action";
-import { useContext } from "react";
-export default function AllMovieLists() {
-  const x = useContext(Movies)
+
+function AllMovieLists() {
+
   return (
-    <section className="bg-[#121212] p-4 pb-7">
+    <section className="bg-[#141414] p-4 pb-7">
       <TrendingMovies />
       <AnimatedMovies />
       <UpcomingMovies />
       <TopRatedMovies />
       <RomanceMovies />
       <PopularMovies />
-      <ThrillerMovies/>
-      <ComedyMovies/>
-      <ActionMovies/>
+      <ThrillerMovies />
+      <ComedyMovies />
+      <ActionMovies />
     </section>
   );
 }
+export default AllMovieLists
+

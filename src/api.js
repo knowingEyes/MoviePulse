@@ -38,3 +38,16 @@ export async function fetchTrendingMovies(page = 2) {
     return error;
   }
 }
+
+export async function fetchMoviesTrailer(movieId) {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${ApiKey}`
+    );
+    if (!res.ok) throw new Error("Fetched failed");
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
