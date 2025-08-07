@@ -21,11 +21,11 @@ export default function RenderMovies({ moviesResults, title }) {
                   <p className=" text-white font-extrabold">{result.title}</p>
                 </div>
               )}
-              <div className="overflow-hidden ">
+              <div className="overflow-hidden">
                 <img
                   src={`${baseImdbUrl}${result.poster_path}`}
                   alt=""
-                  className={`h-[100%] block ${
+                  className={`block ${
                     result.id && result?.id === selectedMovieId && "scale-[1.1]"
                   } transition-all ease-in-out duration-200 object-cover`}
                 />

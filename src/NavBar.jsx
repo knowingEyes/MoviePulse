@@ -1,20 +1,31 @@
+import { useState } from "react";
 import { FiSearch, FiHome, FiBookmark, FiPlusSquare } from "./utils/iconsLib";
+import { UseActiveTab } from "./context/AppContext";
 
 export default function NavBar() {
+  const {handleActiveTab} = UseActiveTab()
   return (
     <nav
       className="bg-gradient-to-t from-[#141414] to-transparent text-white 
        fixed w-full bottom-0 p-3"
     >
-      <ul className="flex justify-between  items-end">
+      <ul className="flex justify-between  items-end [&_button]:cursor-pointer">
         <li>
-          <FiHome />
+          <button onClick={() => handleActiveTab("Home")}>
+            {" "}
+            <FiHome />
+          </button>
         </li>
         <li>
-          <FiSearch />
+          <button onClick={() => handleActiveTab("Search")}>
+            <FiSearch />
+          </button>
         </li>
         <li>
-          <FiBookmark />
+          <button onClick={() => handleActiveTab("Watchlist")}>
+            {" "}
+            <FiBookmark />
+          </button>
           <p></p>
         </li>
       </ul>

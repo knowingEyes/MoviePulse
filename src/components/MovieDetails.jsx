@@ -3,11 +3,14 @@ import { UseSelectedMovie } from "../context/AppContext";
 import { fetchMoviesByCategory, fetchMoviesTrailer } from "../api";
 import { FiArrowLeft, FiCalendar, FiClock } from "../utils/iconsLib";
 import Stars from "./RatingStars";
+import { FaStar } from "../utils/iconsLib";
+import MightAlsoLike from "../sections/core/MightLike";
 
 export default function MovieDetailsModal() {
   const { selectedMovieId, handleSelect } = UseSelectedMovie();
   const [selectedMovie, setSelectedMovie] = useState("");
   const [selectedMovieTrailer, setselectedMovieTrailer] = useState("");
+  const [isCollapse, setIsCollapse] = useState(true);
   const {
     original_title: title,
     genres,
@@ -17,7 +20,6 @@ export default function MovieDetailsModal() {
     runtime,
   } = selectedMovie;
   const allgenres = genres?.map((g) => g.name).join(" | ");
-
   useEffect(
     function () {
       async function getSeltedMovieDetails() {
@@ -30,7 +32,7 @@ export default function MovieDetailsModal() {
           (r) => r.type === "Trailer" && r.site === "YouTube"
         ).key;
         setSelectedMovie(selectedMovieDetails);
-        setselectedMovieTrailer(movieTrailerKey);
+        setselectedMovieTrailer(`https://www.youtube.com/embed/${movieTrailerKey}`);
       }
       getSeltedMovieDetails();
     },
@@ -40,10 +42,10 @@ export default function MovieDetailsModal() {
   return (
     <>
       {selectedMovieId && (
-        <section className="bg-[#141414] fixed inset-0 text- z-50 text-white">
+        <section className="bg-[#141414] fixed bottom-0 top-0 right-0  text- z-50 text-white overflow-auto">
           <div className="relative">
             <iframe
-              src={`https://www.youtube.com/embed/${selectedMovieTrailer}`}
+              src={selectedMovieTrailer}
               alt=""
               className="h-70 w-full absolute"
               allowFullScreen
@@ -68,6 +70,10 @@ export default function MovieDetailsModal() {
                   <FiClock />
                   <span>{runtime}mins</span>
                 </div>
+                <div>
+                  <FaStar className="text-yellow-400" />
+                  <span>{Number(rating).toFixed(2)} ratings</span>
+                </div>
               </div>
               <p>Genre : {allgenres}</p>
             </div>
@@ -76,10 +82,16 @@ export default function MovieDetailsModal() {
                 Add to watchlist
               </button>
               <div className="rounded-xl py-3 bg-white/5 flex justify-center h-10">
-                <Stars size="text-[18px]" color="text-yellow-400 " maxLength={10} defaultRating={0}/>
+                <Stars
+                  size="text-[18px]"
+                  color="text-yellow-400 "
+                  maxLength={10}
+                  defaultRating={0}
+                />
               </div>
             </div>
             <p className="text-gray-300 text-sm mt-5">{overview}</p>
+            <MightAlsoLike genre={genres?.[0]?.id ?? 28} />
           </div>
         </section>
       )}

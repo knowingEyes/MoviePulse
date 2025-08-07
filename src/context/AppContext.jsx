@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 const SelectedMovieDetailContext = createContext();
+const ActiveTabContext = createContext();
 
 function MovieProvider({ children }) {
   // const [hoveredMovieId, sethoveredMovieId] = useState(null);
@@ -17,6 +18,18 @@ function MovieProvider({ children }) {
     </SelectedMovieDetailContext.Provider>
   );
 }
+function ActiveTabProvider({ children }) {
+  const [activeTab, setActiveTab] = useState("Home");
+  function handleActiveTab(tab) {
+    setActiveTab(tab);
+  }
+
+  return (
+    <ActiveTabContext.Provider value={{ handleActiveTab, activeTab }}>
+      {children}
+    </ActiveTabContext.Provider>
+  );
+}
 
 function UseSelectedMovie() {
   const selectedMovie = useContext(SelectedMovieDetailContext);
@@ -24,5 +37,9 @@ function UseSelectedMovie() {
     throw new Error("Cannot use this out side its provider");
   return selectedMovie;
 }
+function UseActiveTab() {
+  const activeTab = useContext(ActiveTabContext);
+  return activeTab;
+}
 
-export { MovieProvider, UseSelectedMovie };
+export { MovieProvider, UseSelectedMovie , ActiveTabProvider, UseActiveTab};
