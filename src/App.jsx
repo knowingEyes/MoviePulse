@@ -9,7 +9,7 @@ import AllSections from "./sections/AllSections";
 
 function App() {
   return (
-    <div className="bg-[#121212] font-sans">
+    <div className="font-sans w-full">
       <ActiveTabProvider>
         <MovieProvider>
           <Header />

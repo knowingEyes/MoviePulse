@@ -7,11 +7,11 @@ export default function HeroBanner() {
 
   const [popularMovie, setPoularMovie] = useState("");
   const imgUrl = `https://image.tmdb.org/t/p/original${popularMovie.poster_path}`;
-  const { handleSelect, selectedMovieId } = UseSelectedMovie();
+  const { handleSelect } = UseSelectedMovie();
   useEffect(function () {
     async function getTrendingMovie() {
       const trendingMovie = await fetchMoviesByCategory("now_playing");
-      setPoularMovie(trendingMovie? .results[9]);
+      setPoularMovie(trendingMovie?.results[9]);
     }
     getTrendingMovie();
   }, []);
@@ -27,12 +27,12 @@ export default function HeroBanner() {
           {popularMovie.original_title}
         </h1>
         <p className="text-sm text-gray-300 "> {popularMovie.release_date}</p>
-        <div className="flex justify-center gap-3 mt-5">
+        <div className="flex justify-center gap-3 mt-5 ">
           <button
             className="bg-[#ef4444] text-white px-6 rounded-md py-1 cursor-pointer"
             onClick={() => handleSelect(popularMovie.id)}
           >
-            Wathch Trailer
+            Watch Trailer
           </button>{" "}
           <button className="bg-white/20 text-white px-6 py-1 rounded-md">
             Add to watch list.

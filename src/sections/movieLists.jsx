@@ -11,7 +11,7 @@ import ActionMovies from "./genre/Action";
 function AllMovieLists() {
 
   return (
-    <section className="bg-[#141414] p-4 pb-7">
+    <section className=" p-4 pb-7">
       <TrendingMovies />
       <AnimatedMovies />
       <UpcomingMovies />

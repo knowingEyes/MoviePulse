@@ -6,7 +6,7 @@ export default function NavBar() {
   const {handleActiveTab} = UseActiveTab()
   return (
     <nav
-      className="bg-gradient-to-t from-[#141414] to-transparent text-white 
+      className="bg-gradient-to-t from-[#141414] to-transparent text-white z-40
        fixed w-full bottom-0 p-3"
     >
       <ul className="flex justify-between  items-end [&_button]:cursor-pointer">

@@ -29,10 +29,12 @@ export default function MovieDetailsModal() {
         );
         const movieTrailer = await fetchMoviesTrailer(selectedMovieId);
         const movieTrailerKey = movieTrailer.results?.find(
-          (r) => r.type === "Trailer" && r.site === "YouTube"
+          (r) => r?.type === "Trailer" && r?.site === "YouTube"
         ).key;
         setSelectedMovie(selectedMovieDetails);
-        setselectedMovieTrailer(`https://www.youtube.com/embed/${movieTrailerKey}`);
+        setselectedMovieTrailer(
+          `https://www.youtube.com/embed/${movieTrailerKey}`
+        );
       }
       getSeltedMovieDetails();
     },
@@ -42,7 +44,7 @@ export default function MovieDetailsModal() {
   return (
     <>
       {selectedMovieId && (
-        <section className="bg-[#141414] fixed bottom-0 top-0 right-0  text- z-50 text-white overflow-auto">
+        <section className="bg-[#141414] fixed inset-0 text- z-50 text-white overflow-auto">
           <div className="relative">
             <iframe
               src={selectedMovieTrailer}
@@ -75,7 +77,7 @@ export default function MovieDetailsModal() {
                   <span>{Number(rating).toFixed(2)} ratings</span>
                 </div>
               </div>
-              <p>Genre : {allgenres}</p>
+              <p className="text-sm text-gray-400">Genre : {allgenres}</p>
             </div>
             <div className="w-full mt-2 flex flex-col gap-3">
               <button className="bg-[#ef4444] rounded-xl text-[18px]  h-10 ">
