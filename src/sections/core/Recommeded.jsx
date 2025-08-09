@@ -16,7 +16,7 @@ function RecommendedMovies() {
   return (
     <RenderMoviesVertical
       movies={recommendMovies}
-      secTitle="Reccomended Movies and Shows for you"
+      secTitle="Recomended Movies and Shows for you"
     />
   );
 }

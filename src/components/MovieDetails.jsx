@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { UseSelectedMovie } from "../context/AppContext";
+import { UseSelectedMovie, UseWatchedMovie } from "../context/AppContext";
 import { fetchMoviesByCategory, fetchMoviesTrailer } from "../api";
-import { FiArrowLeft, FiCalendar, FiClock } from "../utils/iconsLib";
+import { FiArrowLeft, FiCalendar, FiCheck, FiClock } from "../utils/iconsLib";
 import Stars from "./RatingStars";
 import { FaStar } from "../utils/iconsLib";
 import MightAlsoLike from "../sections/core/MightLike";
+import Button from "./Button";
 
 export default function MovieDetailsModal() {
   const { selectedMovieId, handleSelect } = UseSelectedMovie();
   const [selectedMovie, setSelectedMovie] = useState("");
   const [selectedMovieTrailer, setselectedMovieTrailer] = useState("");
-  const [isCollapse, setIsCollapse] = useState(true);
+  const { handleWatchedMovie, watchedMovie } = UseWatchedMovie();
+  // const [isCollapse, setIsCollapse] = useState(true);
   const {
     original_title: title,
     genres,
@@ -18,8 +20,11 @@ export default function MovieDetailsModal() {
     release_date: released,
     vote_average: rating,
     runtime,
+    id,
   } = selectedMovie;
   const allgenres = genres?.map((g) => g.name).join(" | ");
+  const isWatched = watchedMovie.map(({ id }) => id).includes(id);
+
   useEffect(
     function () {
       async function getSeltedMovieDetails() {
@@ -79,10 +84,17 @@ export default function MovieDetailsModal() {
               </div>
               <p className="text-sm text-gray-400">Genre : {allgenres}</p>
             </div>
-            <div className="w-full mt-2 flex flex-col gap-3">
-              <button className="bg-[#ef4444] rounded-xl text-[18px]  h-10 ">
-                Add to watchlist
-              </button>
+            <div className="w-full mt-2 flex flex-col gap-3 [&>button]:h-10">
+              {!isWatched ? 
+                <Button handleClick={() => handleWatchedMovie({ title, id })}>
+                  Add to watchlist
+                </Button>
+               : 
+                <Button>
+                  <FiCheck  size={"20px"}/> Yov've watched this movie
+                </Button>
+              
+              }
               <div className="rounded-xl py-3 bg-white/5 flex justify-center h-10">
                 <Stars
                   size="text-[18px]"

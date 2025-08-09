@@ -2,9 +2,25 @@ import { createContext, useContext, useState } from "react";
 
 const SelectedMovieDetailContext = createContext();
 const ActiveTabContext = createContext();
+const WatchedMovieContext = createContext();
 
+function WatchedMovieProvider({ children }) {
+  const [watchedMovie, setWachedMovie] = useState([]);
+  function handleWatchedMovie(movie) {
+    setWachedMovie((prev)=>[...prev, movie]);
+  }
+  return (
+    <WatchedMovieContext value={{ handleWatchedMovie, watchedMovie }}>
+      {children}
+    </WatchedMovieContext>
+  );
+}
+
+function UseWatchedMovie() {
+  const watchedMovie = useContext(WatchedMovieContext);
+  return watchedMovie;
+}
 function MovieProvider({ children }) {
-  // const [hoveredMovieId, sethoveredMovieId] = useState(null);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   function handleSelect(id) {
     setSelectedMovieId(id);
@@ -42,4 +58,11 @@ function UseActiveTab() {
   return activeTab;
 }
 
-export { MovieProvider, UseSelectedMovie , ActiveTabProvider, UseActiveTab};
+export {
+  MovieProvider,
+  UseSelectedMovie,
+  ActiveTabProvider,
+  UseActiveTab,
+  UseWatchedMovie,
+  WatchedMovieProvider,
+};

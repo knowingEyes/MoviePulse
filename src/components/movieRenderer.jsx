@@ -1,7 +1,11 @@
-import { UseActiveTab, UseSelectedMovie } from "../context/AppContext";
+import {
+  UseActiveTab,
+  UseSelectedMovie,
+  UseWatchedMovie,
+} from "../context/AppContext";
 import { FaStar } from "react-icons/fa6";
 
-export function RenderMovies({ moviesResults, title, wrap="" }) {
+export function RenderMovies({ moviesResults, title, wrap = "" }) {
   const { handleSelect, selectedMovieId } = UseSelectedMovie();
   const { handleActiveTab } = UseActiveTab();
   function handleTabSwitchAndSelect(id) {
@@ -35,6 +39,7 @@ export function RenderMovies({ moviesResults, title, wrap="" }) {
               )}
               <div className="h-full">
                 <img
+                  loading="lazy"
                   src={`${baseImdbUrl}${poster_path} `}
                   alt=""
                   className={`w-full h-full  object-cover${
@@ -62,13 +67,14 @@ export function RenderMoviesVertical({ movies, secTitle }) {
       <h1 className="font-bold text-lg">{secTitle}</h1>
       <ul>
         {movies.map(
-          ({ poster_path, title, vote_average, runtime, release_date, id }) => (
+          ({ poster_path, title, vote_average,  release_date, id }) => (
             <li
               key={id}
               onClick={() => handleTabSwitchAndSelect(id)}
               className="flex gap-3 items-center hover:bg-[#121212] rounded-md transition-all ease-in-out cursor-pointer p-2"
             >
               <img
+                loading="lazy"
                 src={`https://image.tmdb.org/t/p/original${poster_path}`}
                 alt=""
                 className="w-20 rounde-md rounded-md"
@@ -76,7 +82,6 @@ export function RenderMoviesVertical({ movies, secTitle }) {
               <div>
                 <h2 className="text-sm font-bold">{title}</h2>
                 <p className="text-xs my-1">{release_date}</p>
-                <span>{runtime}</span>{" "}
                 <div className="flex items-center gap-1 text-sm ">
                   <FaStar className="text-yellow-400" />
                   <span>{Number(vote_average).toFixed(2)}</span>
