@@ -1,7 +1,6 @@
 import NavBar from "./NavBar";
 import HeroBanner from "./HeroBanner";
 import Header from "./components/AppHeader";
-import AllMovieLists from "./sections/movieLists";
 import {
   ActiveTabProvider,
   MovieProvider,
@@ -10,7 +9,6 @@ import {
 
 import MovieDetailsModal from "./components/MovieDetails";
 import AllSections from "./sections/AllSections";
-
 function App() {
   return (
     <div className="font-sans w-full">

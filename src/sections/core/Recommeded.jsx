@@ -1,21 +1,12 @@
 import { fetchRecommededMovie } from "../../api";
 import { RenderMoviesVertical } from "../../components/movieRenderer";
-import { useEffect, useState } from "react";
+import useMovies from "../../hooks/useMovies";
 
 function RecommendedMovies() {
-  const [recommendMovies, setRecommendedMovies] = useState([]);
-
-  useEffect(function () {
-    async function getRecommededMovies() {
-      const recommeded = await fetchRecommededMovie();
-      setRecommendedMovies(recommeded.results);
-    }
-    getRecommededMovies();
-  }, []);
-
+  const [movies] = useMovies(() => fetchRecommededMovie());
   return (
     <RenderMoviesVertical
-      movies={recommendMovies}
+      movies={movies}
       secTitle="Recomended Movies and Shows for you"
     />
   );

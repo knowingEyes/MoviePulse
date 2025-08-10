@@ -1,13 +1,10 @@
-import {
-  UseActiveTab,
-  UseSelectedMovie,
-  UseWatchedMovie,
-} from "../context/AppContext";
+import { useActiveTabContext } from "../hooks/useActiveTabContext";
 import { FaStar } from "react-icons/fa6";
+import { useSelectedMovieContext } from "../hooks/useSelectedMovieContext";
 
 export function RenderMovies({ moviesResults, title, wrap = "" }) {
-  const { handleSelect, selectedMovieId } = UseSelectedMovie();
-  const { handleActiveTab } = UseActiveTab();
+  const { handleSelect, selectedMovieId } = useSelectedMovieContext();
+  const { handleActiveTab } = useActiveTabContext();
   function handleTabSwitchAndSelect(id) {
     handleSelect(id);
     handleActiveTab("Home");
@@ -56,8 +53,8 @@ export function RenderMovies({ moviesResults, title, wrap = "" }) {
 }
 
 export function RenderMoviesVertical({ movies, secTitle }) {
-  const { handleSelect } = UseSelectedMovie();
-  const { handleActiveTab } = UseActiveTab();
+  const { handleSelect } = useSelctedMovieContext();
+  const { handleActiveTab } = useActiveTabContext();
   function handleTabSwitchAndSelect(id) {
     handleSelect(id);
     handleActiveTab("Home");
@@ -67,7 +64,7 @@ export function RenderMoviesVertical({ movies, secTitle }) {
       <h1 className="font-bold text-lg">{secTitle}</h1>
       <ul>
         {movies.map(
-          ({ poster_path, title, vote_average,  release_date, id }) => (
+          ({ poster_path, title, vote_average, release_date, id }) => (
             <li
               key={id}
               onClick={() => handleTabSwitchAndSelect(id)}

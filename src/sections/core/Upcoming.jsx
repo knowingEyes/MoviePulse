@@ -1,15 +1,8 @@
-import { useEffect, useState } from "react";
 import RenderMovies from "../../components/movieRenderer";
 import { fetchMoviesByCategory } from "../../api";
+import useMovies from "../../hooks/useMovies";
 
 export default function UpcomingMovies() {
-  const [UpcomingMovies, setUpcomingMovies] = useState([]);
-  useEffect(function () {
-    async function getUpcomingMovies() {
-      const data = await fetchMoviesByCategory("upcoming");
-      setUpcomingMovies(data.results);
-    }
-    getUpcomingMovies();
-  }, []);
-  return <RenderMovies moviesResults={UpcomingMovies} title="Upcoming" />;
+  const [movies] = useMovies(() => fetchMoviesByCategory("upcoming"));
+return <RenderMovies moviesResults={movies} title="Upcoming" />;
 }

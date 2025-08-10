@@ -1,15 +1,8 @@
-import { useEffect, useState } from "react";
 import RenderMovies from "../../components/movieRenderer";
 import { fetchMoviesByCategory } from "../../api";
+import useMovies from "../../hooks/useMovies";
 
 export default function TopRatedMovies() {
-  const [TopRatedMovies, setTopRatedMovies] = useState([]);
-  useEffect(function () {
-    async function getTopRatedMovies() {
-      const data = await fetchMoviesByCategory("top_rated");
-      setTopRatedMovies(data.results);
-    }
-    getTopRatedMovies();
-  }, []);
-  return <RenderMovies moviesResults={TopRatedMovies} title="Top-Rated" />;
+  const [movies] = useMovies(() => fetchMoviesByCategory("top_rated"));
+  return <RenderMovies moviesResults={movies} title="Top-Rated" />;
 }

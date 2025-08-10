@@ -7,7 +7,7 @@ const WatchedMovieContext = createContext();
 function WatchedMovieProvider({ children }) {
   const [watchedMovie, setWachedMovie] = useState([]);
   function handleWatchedMovie(movie) {
-    setWachedMovie((prev)=>[...prev, movie]);
+    setWachedMovie((prev) => [...prev, movie]);
   }
   return (
     <WatchedMovieContext value={{ handleWatchedMovie, watchedMovie }}>
@@ -16,10 +16,6 @@ function WatchedMovieProvider({ children }) {
   );
 }
 
-function UseWatchedMovie() {
-  const watchedMovie = useContext(WatchedMovieContext);
-  return watchedMovie;
-}
 function MovieProvider({ children }) {
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   function handleSelect(id) {
@@ -47,22 +43,14 @@ function ActiveTabProvider({ children }) {
   );
 }
 
-function UseSelectedMovie() {
-  const selectedMovie = useContext(SelectedMovieDetailContext);
-  if (selectedMovie === undefined)
-    throw new Error("Cannot use this out side its provider");
-  return selectedMovie;
-}
-function UseActiveTab() {
-  const activeTab = useContext(ActiveTabContext);
-  return activeTab;
-}
+
+
 
 export {
   MovieProvider,
-  UseSelectedMovie,
   ActiveTabProvider,
-  UseActiveTab,
-  UseWatchedMovie,
   WatchedMovieProvider,
+  WatchedMovieContext,
+  ActiveTabContext,
+  SelectedMovieDetailContext
 };

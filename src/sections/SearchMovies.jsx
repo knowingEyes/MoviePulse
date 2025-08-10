@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchInput from "../components/SearchInput";
-import { UseActiveTab } from "../context/AppContext";
+import { useActiveTabContext } from "../hooks/useActiveTabContext";
 import RecommendedMovies from "./core/Recommeded";
 import TodayPicksMovies from "./core/TodaysPicks";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ import RenderMovies from "../components/movieRenderer";
 
 function SearchForMovies() {
   const [query, setQuery] = useState("");
-  const { handleActiveTab } = UseActiveTab();
+  const { handleActiveTab } = useActiveTabContext();
   const [searchResults, setSearchResults] = useState([]);
   useEffect(
     function () {
@@ -38,7 +38,13 @@ function SearchForMovies() {
             <TodayPicksMovies />
             <RecommendedMovies />
           </>
-        ) : <RenderMovies moviesResults={searchResults} title="Top matches" wrap="flex-wrap justify-center"/>}
+        ) : (
+          <RenderMovies
+            moviesResults={searchResults}
+            title="Top matches"
+            wrap="flex-wrap justify-center"
+          />
+        )}
       </div>
     </div>
   );

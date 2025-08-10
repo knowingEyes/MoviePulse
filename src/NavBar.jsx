@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FiSearch, FiHome, FiBookmark, FiPlusSquare } from "./utils/iconsLib";
-import { UseActiveTab } from "./context/AppContext";
+import { useActiveTabContext } from "./hooks/useActiveTabContext";
 
 export default function NavBar() {
-  const {handleActiveTab} = UseActiveTab()
+  const { handleActiveTab } = useActiveTabContext();
   return (
     <nav
       className="bg-gradient-to-t from-[#141414] to-transparent text-white z-40

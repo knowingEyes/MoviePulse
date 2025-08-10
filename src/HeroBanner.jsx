@@ -1,17 +1,18 @@
 import { fetchMoviesByCategory } from "./api";
 import { useEffect, useState } from "react";
-import { UseActiveTab, UseSelectedMovie, UseWatchedMovie } from "./context/AppContext";
+import { useActiveTabContext } from "./hooks/useActiveTabContext";
 import { FaPlay, FaPlus, FiCheck } from "./utils/iconsLib";
 import Button from "./components/Button";
+import useWatchedMovies from "./hooks/usewatchedMovie";
+import { useSelectedMovieContext } from "./hooks/useSelectedMovieContext";
 
 export default function HeroBanner() {
-  const { activeTab } = UseActiveTab();
-  const { handleWatchedMovie, watchedMovie } = UseWatchedMovie();
+  const { activeTab } = useActiveTabContext();
   const [nowPlaying, setPoularMovie] = useState("");
-  const {id, title, poster_path, release_date} = nowPlaying
+  const { id, title, poster_path, release_date } = nowPlaying;
+  const [isWatched, setIsWatchedMovie] = useWatchedMovies(title, id);
   const imgUrl = `https://image.tmdb.org/t/p/original${poster_path}`;
-  const { handleSelect } = UseSelectedMovie();
-  const watchedMovieid = watchedMovie.map(({id})=> id).includes(id)
+  const { handleSelect } = useSelectedMovieContext();
 
   useEffect(function () {
     async function getTrendingMovie() {
@@ -20,7 +21,7 @@ export default function HeroBanner() {
     }
     getTrendingMovie();
   }, []);
-  if (activeTab !== "Home") return null;
+  if (activeTab !== "Home") return;
   return (
     <section
       className="relative  w-full h-[70vh]"
@@ -36,11 +37,16 @@ export default function HeroBanner() {
           <Button handleClick={() => handleSelect(id)}>
             <FaPlay /> Watch Trailer
           </Button>
-          {!watchedMovieid ? <Button bg="bg-white/20" handleClick={()=> handleWatchedMovie({ title , id})}>
-            <FaPlus /> Add to watch list.
-          </Button> :<Button bg="bg-white/20">
-            <FiCheck size={"20px"}/>Already Watched
-          </Button>}
+          {!isWatched ? (
+            <Button bg="bg-white/20" handleClick={setIsWatchedMovie}>
+              <FaPlus /> Add to watch list.
+            </Button>
+          ) : (
+            <Button bg="bg-white/20">
+              <FiCheck size={"20px"} />
+              Already Watched
+            </Button>
+          )}
         </div>
       </div>
     </section>
