@@ -8,11 +8,12 @@ export default function useMovies(callback) {
       async function getMovies() {
         const { results } = await callback();
         setMovies(results);
+      
       }
       getMovies();
     },
     []
   );
 
-  return [movies, callback];
+  return [movies];
 }

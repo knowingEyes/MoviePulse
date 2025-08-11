@@ -21,7 +21,7 @@ export default function MovieDetailsModal() {
     runtime,
     id,
   } = selectedMovie;
-  const [isWatched, setIsWatchedMovie] = useWatchedMovies(title, id);
+  const {isWatched, setIsWatchedMovie} = useWatchedMovies(title, id, runtime);
   const allgenres = genres?.map((g) => g.name).join(" | ");
   useEffect(
     function () {

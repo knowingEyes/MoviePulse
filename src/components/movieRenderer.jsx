@@ -14,7 +14,7 @@ export function RenderMovies({ moviesResults, title, wrap = "" }) {
     <section className="mb-5">
       <h1 className="text-white font-bold mb-2 text-lg">{title}</h1>
       <ul
-        className={`flex ${wrap} gap-2 overflow-x-auto  items-center  [&::-webkit-scrollbar]:bg-transparent 
+        className={`flex ${wrap} gap-2 overflow-x-auto  items-center  [&::-webkit-scrollbar]:bg-transparent relative 
       [&::-webkit-scrollbar-thumb]:bg-[rgba(255,255,255,0.1)] [&::-webkit-scrollbar]:w-[6px]
        [&::-webkit-scrollbar-thumb]:rounded-2xl  [&::-webkit-scrollbar]:h-[7px] pb-1`}
       >
@@ -53,7 +53,7 @@ export function RenderMovies({ moviesResults, title, wrap = "" }) {
 }
 
 export function RenderMoviesVertical({ movies, secTitle }) {
-  const { handleSelect } = useSelctedMovieContext();
+  const { handleSelect } = useSelectedMovieContext();
   const { handleActiveTab } = useActiveTabContext();
   function handleTabSwitchAndSelect(id) {
     handleSelect(id);
@@ -62,8 +62,8 @@ export function RenderMoviesVertical({ movies, secTitle }) {
   return (
     <section>
       <h1 className="font-bold text-lg">{secTitle}</h1>
-      <ul>
-        {movies.map(
+      <ul  className="text-white">
+        {(movies ?? []).map(
           ({ poster_path, title, vote_average, release_date, id }) => (
             <li
               key={id}
@@ -71,7 +71,6 @@ export function RenderMoviesVertical({ movies, secTitle }) {
               className="flex gap-3 items-center hover:bg-[#121212] rounded-md transition-all ease-in-out cursor-pointer p-2"
             >
               <img
-                loading="lazy"
                 src={`https://image.tmdb.org/t/p/original${poster_path}`}
                 alt=""
                 className="w-20 rounde-md rounded-md"

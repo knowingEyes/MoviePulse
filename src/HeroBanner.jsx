@@ -10,7 +10,7 @@ export default function HeroBanner() {
   const { activeTab } = useActiveTabContext();
   const [nowPlaying, setPoularMovie] = useState("");
   const { id, title, poster_path, release_date } = nowPlaying;
-  const [isWatched, setIsWatchedMovie] = useWatchedMovies(title, id);
+  const {isWatched, setIsWatchedMovie} = useWatchedMovies(title, id);
   const imgUrl = `https://image.tmdb.org/t/p/original${poster_path}`;
   const { handleSelect } = useSelectedMovieContext();
 

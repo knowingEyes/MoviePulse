@@ -11,19 +11,27 @@ function SearchForMovies() {
   const [query, setQuery] = useState("");
   const { handleActiveTab } = useActiveTabContext();
   const [searchResults, setSearchResults] = useState([]);
+  const controller = new AbortController();
+  const { signal } = controller;
+  const [isloading, setIsLoading] = useState(false);
   useEffect(
     function () {
       async function getSearchedMovies() {
-        if (query.length <= 3) return;
-        const { results } = await searchForMovies(query);
+        if (query.length >= 3) return;
+        setIsLoading(true);
+        const { results } = await searchForMovies(query, signal);
         setSearchResults(results);
+        setIsLoading(false);
       }
       getSearchedMovies();
+
+      return () => controller.abort();
     },
     [query]
   );
+
   return (
-    <div className="relative z-50 bg-[#0e0e0e] text-white overflow-y-scroll p-3 w-full">
+    <div className="relative z-50 bg-[#0a0a0a] text-white overflow-y-scroll p-3 w-full">
       <header>
         <SearchInput
           query={query}
@@ -38,6 +46,8 @@ function SearchForMovies() {
             <TodayPicksMovies />
             <RecommendedMovies />
           </>
+        ) : isloading ? (
+          <p className="text-center text-md mt-5">loading...</p>
         ) : (
           <RenderMovies
             moviesResults={searchResults}

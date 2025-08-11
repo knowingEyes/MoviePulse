@@ -1,5 +1,3 @@
-
-
 export const ApiKey = import.meta.env.VITE_TMDB_API_KEY;
 
 export async function fetchMoviesByCategory(options) {
@@ -82,11 +80,9 @@ export async function fetchTodayPicks() {
   }
 }
 
-export async function searchForMovies(query) {
+export async function searchForMovies(query, signal) {
   try {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&query=${query}&page=1`
-    );
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&query=${query}&page=1`, { signal } );
     if (!res.ok) throw new Error("Fetched failed");
     const data = await res.json();
     return data;
