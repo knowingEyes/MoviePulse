@@ -9,10 +9,12 @@ import {
 
 import MovieDetailsModal from "./components/MovieDetails";
 import AllSections from "./sections/AllSections";
+import LoaderSkelenton from "./components/Loader";
 function App() {
   return (
     <div className="font-sans w-full">
-      <WatchedMovieProvider>
+      <LoaderSkelenton />
+      {/* <WatchedMovieProvider>
         <ActiveTabProvider>
           <MovieProvider>
             <Header />
@@ -22,7 +24,7 @@ function App() {
             <NavBar />
           </MovieProvider>
         </ActiveTabProvider>
-      </WatchedMovieProvider>
+      </WatchedMovieProvider> */}
     </div>
   );
 }

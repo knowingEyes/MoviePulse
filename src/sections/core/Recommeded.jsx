@@ -1,9 +1,9 @@
 import { fetchRecommededMovie } from "../../api";
 import { RenderMoviesVertical } from "../../components/movieRenderer";
-import useMovies from "../../hooks/useMovies";
+import useMoviesFetch from "../../hooks/useMoviesFetch";
 
 function RecommendedMovies() {
-  const [movies] = useMovies(() => fetchRecommededMovie());
+  const [movies] = useMoviesFetch(() => fetchRecommededMovie());
   return (
     <RenderMoviesVertical
       movies={movies}

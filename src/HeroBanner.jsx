@@ -43,8 +43,8 @@ export default function HeroBanner() {
             </Button>
           ) : (
             <Button bg="bg-white/20">
-              <FiCheck size={"20px"} />
-              Already Watched
+              Added to Watchlist
+              <FiCheck size={"18px"} />
             </Button>
           )}
         </div>

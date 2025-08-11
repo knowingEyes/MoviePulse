@@ -1,8 +1,8 @@
 import RenderMovies from "../../components/movieRenderer";
 import { fetchMoviesByCategory } from "../../api";
-import useMovies from "../../hooks/useMovies";
+import useMoviesFetch from "../../hooks/useMoviesFetch";
 
 export default function PopularMovies() {
-  const [movies] = useMovies(() => fetchMoviesByCategory("popular"));
+  const [movies] = useMoviesFetch(() => fetchMoviesByCategory("popular"));
   return <RenderMovies moviesResults={movies} title="Popular" />;
 }

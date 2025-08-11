@@ -5,7 +5,7 @@ import useWatchedMovies from "../hooks/usewatchedMovie";
 function WatchList() {
   const { watchedMovie } = useWatchedMovies();
   const [watchedMoviesResults, setwatchedMoviesResults] = useState([]);
-  console.log(watchedMovie)
+  console.log(watchedMovie);
   useEffect(
     function () {
       async function getWatchedMovies() {
@@ -19,17 +19,12 @@ function WatchList() {
     [watchedMovie]
   );
   return (
-    <div>
-      <header className="bg-[#0e0e0e] p-5 text-white flex justify-between">
-        <h1 className="text-white font-bold text-md">
-          Watch Later
-        </h1>
+    <div className="bg-[#080808] text-white">
+      <header className="bg-[#0a0a0a] p-5 flex justify-between">
+        <h1 className="text-white font-bold text-lg">Watch Later</h1>
         <p></p>
       </header>
-      <RenderMoviesVertical
-        movies={watchedMoviesResults}
-        secTitle="Watched Movie "
-      />
+      <RenderMoviesVertical movies={watchedMoviesResults} />
     </div>
   );
 }

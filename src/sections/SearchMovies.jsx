@@ -17,11 +17,12 @@ function SearchForMovies() {
   useEffect(
     function () {
       async function getSearchedMovies() {
-        if (query.length >= 3) return;
-        setIsLoading(true);
+        if (query.length <= 3) return;
+        // setIsLoading(true);
         const { results } = await searchForMovies(query, signal);
         setSearchResults(results);
-        setIsLoading(false);
+        console.log(results)
+        // setIsLoading(false);
       }
       getSearchedMovies();
 
@@ -31,7 +32,7 @@ function SearchForMovies() {
   );
 
   return (
-    <div className="relative z-50 bg-[#0a0a0a] text-white overflow-y-scroll p-3 w-full">
+    <div className="fixed z-50 bg-[#080808] text-white overflow-y-scroll p-3 w-full inset-0">
       <header>
         <SearchInput
           query={query}

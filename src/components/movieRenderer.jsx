@@ -18,7 +18,7 @@ export function RenderMovies({ moviesResults, title, wrap = "" }) {
       [&::-webkit-scrollbar-thumb]:bg-[rgba(255,255,255,0.1)] [&::-webkit-scrollbar]:w-[6px]
        [&::-webkit-scrollbar-thumb]:rounded-2xl  [&::-webkit-scrollbar]:h-[7px] pb-1`}
       >
-        {moviesResults.map(({ poster_path, title, id }) => (
+        {(moviesResults ?? []).map(({ poster_path, title, id }) => (
           <li
             key={id}
             className="cursor-pointer relative"

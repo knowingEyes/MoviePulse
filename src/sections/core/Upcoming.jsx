@@ -1,8 +1,8 @@
 import RenderMovies from "../../components/movieRenderer";
 import { fetchMoviesByCategory } from "../../api";
-import useMovies from "../../hooks/useMovies";
+import useMoviesFetch from "../../hooks/useMoviesFetch";
 
 export default function UpcomingMovies() {
-  const [movies] = useMovies(() => fetchMoviesByCategory("upcoming"));
-return <RenderMovies moviesResults={movies} title="Upcoming" />;
+  const [movies] = useMoviesFetch(() => fetchMoviesByCategory("upcoming"));
+  return <RenderMovies moviesResults={movies} title="Upcoming" />;
 }

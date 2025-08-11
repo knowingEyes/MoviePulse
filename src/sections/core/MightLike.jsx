@@ -1,9 +1,9 @@
 import { fetchMoviesByGenry } from "../../api";
 import { RenderMoviesVertical } from "../../components/movieRenderer";
-import useMovies from "../../hooks/useMovies";
+import useMoviesFetch from "../../hooks/useMoviesFetch";
 
 function MightAlsoLike({ genre }) {
-  const [movies] = useMovies(() =>
+  const [movies] = useMoviesFetch(() =>
     fetchMoviesByGenry(genre, Math.round(Math.random() + 1 * 50))
   );
   return (

@@ -1,9 +1,9 @@
 import { fetchTodayPicks } from "../../api";
 import RenderMovies from "../../components/movieRenderer";
-import useMovies from "../../hooks/useMovies";
+import useMoviesFetch from "../../hooks/useMoviesFetch";
 
 function TodayPicksMovies() {
-  const [movies] = useMovies(() => fetchTodayPicks());
+  const [movies] = useMoviesFetch(() => fetchTodayPicks());
   return <RenderMovies title="Today's Picks" moviesResults={movies} />;
 }
 

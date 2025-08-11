@@ -1,8 +1,8 @@
 import RenderMovies from "../../components/movieRenderer";
 import { fetchMoviesByGenry } from "../../api";
-import useMovies from "../../hooks/useMovies";
+import useMoviesFetch from "../../hooks/useMoviesFetch";
 
 export default function ActionMovies() {
-  const [movies] = useMovies(() => fetchMoviesByGenry(28, 3));
+  const [movies] = useMoviesFetch(() => fetchMoviesByGenry(28, 3));
   return <RenderMovies moviesResults={movies} title="Action" />;
 }

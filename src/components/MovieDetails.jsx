@@ -11,7 +11,7 @@ import useWatchedMovies from "../hooks/usewatchedMovie";
 export default function MovieDetailsModal() {
   const { selectedMovieId, handleSelect } = useSelectedMovieContext();
   const [selectedMovie, setSelectedMovie] = useState("");
-  const [selectedMovieTrailer, setselectedMovieTrailer] = useState("");
+  const [selectedMovieTrailerKey, setselectedMovieTrailerKey] = useState("");
   const {
     original_title: title,
     genres,
@@ -21,7 +21,7 @@ export default function MovieDetailsModal() {
     runtime,
     id,
   } = selectedMovie;
-  const {isWatched, setIsWatchedMovie} = useWatchedMovies(title, id, runtime);
+  const { isWatched, setIsWatchedMovie } = useWatchedMovies(title, id, runtime);
   const allgenres = genres?.map((g) => g.name).join(" | ");
   useEffect(
     function () {
@@ -35,9 +35,7 @@ export default function MovieDetailsModal() {
           (r) => r?.type === "Trailer" && r?.site === "YouTube"
         ).key;
         setSelectedMovie(selectedMovieDetails);
-        setselectedMovieTrailer(
-          `https://www.youtube.com/embed/${movieTrailerKey}`
-        );
+        setselectedMovieTrailerKey(movieTrailerKey);
       }
       getSeltedMovieDetails();
     },
@@ -50,9 +48,9 @@ export default function MovieDetailsModal() {
         <section className="bg-[#141414] fixed inset-0 text- z-50 text-white overflow-auto">
           <div className="relative">
             <iframe
-              src={selectedMovieTrailer}
-              alt=""
-              className="h-70 w-full absolute"
+              src={`https://www.youtube.com/embed/${selectedMovieTrailerKey}`}
+              alt="Youtube"
+              className="h-70 w-full absolute top-0"
               allowFullScreen
             />
             <iframe />
@@ -89,7 +87,8 @@ export default function MovieDetailsModal() {
                 </Button>
               ) : (
                 <Button>
-                  <FiCheck size={"20px"} /> Yov've watched this movie
+                  Added to WatchList
+                  <FiCheck size={"20px"} />
                 </Button>
               )}
               <div className="rounded-xl py-3 bg-white/5 flex justify-center h-10">

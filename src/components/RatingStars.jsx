@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaStar, FaRegStar } from "../utils/iconsLib";
 
-function Stars({ maxLength = 5, size, defaultRating = 4, color }) {
+function Stars({ maxLength = 5, size, defaultRating = 0, color }) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
@@ -17,7 +17,6 @@ function Stars({ maxLength = 5, size, defaultRating = 4, color }) {
               <FaRegStar key={i} onMouseEnter={() => handelRating(i)} />
             ) : (
               <FaStar
-                key={i}
                 onClick={() => setRating(i + 1)}
                 onMouseLeave={() => setTempRating(rating)}
                 onMouseEnter={() => handelRating(i)}
