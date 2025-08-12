@@ -1,18 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 const SelectedMovieDetailContext = createContext();
 const ActiveTabContext = createContext();
-const WatchedMovieContext = createContext();
+const WatchListMoviesContext = createContext();
 
 function WatchedMovieProvider({ children }) {
-  const [watchedMovie, setWachedMovie] = useState([]);
-  function handleWatchedMovie(movie) {
-    setWachedMovie((prev) => [...prev, movie]);
+  const [watchListMovies, setWatchListMovies] = useState([]);
+  function handleWatchListMovies(movie) {
+    setWatchListMovies((prev) => [...prev, movie]);
   }
   return (
-    <WatchedMovieContext value={{ handleWatchedMovie, watchedMovie }}>
+    <WatchListMoviesContext value={{ handleWatchListMovies, watchListMovies }}>
       {children}
-    </WatchedMovieContext>
+    </WatchListMoviesContext>
   );
 }
 
@@ -43,14 +43,11 @@ function ActiveTabProvider({ children }) {
   );
 }
 
-
-
-
 export {
   MovieProvider,
   ActiveTabProvider,
   WatchedMovieProvider,
-  WatchedMovieContext,
+  WatchListMoviesContext,
   ActiveTabContext,
-  SelectedMovieDetailContext
+  SelectedMovieDetailContext,
 };

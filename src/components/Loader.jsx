@@ -1,10 +1,10 @@
 export default function LoaderSkelenton() {
   return (
     <div
-      className="animate-pulse bg fixed inset-0 bg-[#080808] p-4 
-    [&>div]:rounded-lg [&_div]:rounded-lg overflow-y-hidden duration-75"
+      className=" fixed inset-0 bg-[#080808] p-4 
+    [&>div]:rounded-lg [&_div]:rounded-lg overflow-y-hidden duration-75 z-50"
     >
-      <div className="w-full h-[200px] bg-gray-800/30 animate-shimmer"></div>
+      <div className="w-full h-[200px] bg-gray-800/30 animate-pulse"></div>
       <div className="w-60 h-7 bg-gray-800/30 mt-5"></div>
       <div className="flex [&>div]:w-20 gap-3 [&>div]:bg-gray-800/30 [&>div]:h-5 pt-3">
         <div></div>

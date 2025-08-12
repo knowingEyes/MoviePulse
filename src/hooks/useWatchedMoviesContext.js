@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { WatchedMovieContext } from "../context/AppContext";
+import { WatchListMoviesContext } from "../context/AppContext";
  
-export  function useWatchedMovieContext() {
-  const watchedMovie = useContext(WatchedMovieContext);
-  return watchedMovie;
+export  function useWatchListMoviesContext() {
+  const watchListMovies = useContext(WatchListMoviesContext);
+  return watchListMovies;
 }
 

@@ -13,8 +13,7 @@ import LoaderSkelenton from "./components/Loader";
 function App() {
   return (
     <div className="font-sans w-full">
-      <LoaderSkelenton />
-      {/* <WatchedMovieProvider>
+      <WatchedMovieProvider>
         <ActiveTabProvider>
           <MovieProvider>
             <Header />
@@ -24,7 +23,7 @@ function App() {
             <NavBar />
           </MovieProvider>
         </ActiveTabProvider>
-      </WatchedMovieProvider> */}
+      </WatchedMovieProvider>
     </div>
   );
 }

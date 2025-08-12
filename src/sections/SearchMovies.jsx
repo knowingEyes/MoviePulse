@@ -3,34 +3,18 @@ import SearchInput from "../components/SearchInput";
 import { useActiveTabContext } from "../hooks/useActiveTabContext";
 import RecommendedMovies from "./core/Recommeded";
 import TodayPicksMovies from "./core/TodaysPicks";
-import { useEffect } from "react";
-import { searchForMovies } from "../api";
+import { ApiKey } from "../api";
 import RenderMovies from "../components/movieRenderer";
+import useFetch from "../hooks/useFetch";
 
 function SearchForMovies() {
   const [query, setQuery] = useState("");
   const { handleActiveTab } = useActiveTabContext();
-  const [searchResults, setSearchResults] = useState([]);
-  const controller = new AbortController();
-  const { signal } = controller;
-  const [isloading, setIsLoading] = useState(false);
-  useEffect(
-    function () {
-      async function getSearchedMovies() {
-        if (query.length <= 3) return;
-        // setIsLoading(true);
-        const { results } = await searchForMovies(query, signal);
-        setSearchResults(results);
-        console.log(results)
-        // setIsLoading(false);
-      }
-      getSearchedMovies();
-
-      return () => controller.abort();
-    },
-    [query]
+  const { movies, isLoading, error } = useFetch(
+    query.length < 3
+      ? null
+      : `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&query=${query}&page=1`
   );
-
   return (
     <div className="fixed z-50 bg-[#080808] text-white overflow-y-scroll p-3 w-full inset-0">
       <header>
@@ -47,14 +31,17 @@ function SearchForMovies() {
             <TodayPicksMovies />
             <RecommendedMovies />
           </>
-        ) : isloading ? (
-          <p className="text-center text-md mt-5">loading...</p>
+        ) : isLoading ? (
+          <p className="text-center text-md mt-10">Loading search result...</p>
         ) : (
           <RenderMovies
-            moviesResults={searchResults}
+            moviesResults={movies}
             title="Top matches"
             wrap="flex-wrap justify-center"
           />
+        )}
+        {query.length > 3 && !movies.length && !isLoading && (
+          <p className="text-center text-md mt-10">No Results found</p>
         )}
       </div>
     </div>

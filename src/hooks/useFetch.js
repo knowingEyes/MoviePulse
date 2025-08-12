@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
-import { ApiKey } from "../api";
-export default function useFetch() {
+export default function useFetch(url) {
   const [error, setError] = useState("");
-  const [data, setData] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  useEffect(function () {
-    async function fetchApi() {
 
-        setIsLoading(true)
-      try {
-        const res = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${ApiKey}`);
-        if (!res.ok) throw new Error("Fetched failed");
-        const data = await res.json();
-        setData(data);
-      } catch (error) {
-        setError(error.message);
+  useEffect(
+    function () {
+      const controller = new AbortController();
+      const { signal } = controller;
+      async function fetchApi() {
+        if (!url) return;
+        setIsLoading(true);
+      
+        try {
+          const res = await fetch(url, { signal });
+          if (!res.ok) throw new Error("Fetched failed");
+          const  data  = await res.json();
+          setMovies(data["results"] ?? data);
+        } catch (error) {
+          setError(error.status);
+        }
+        setIsLoading(false);
       }
-      setIsLoading(false)
-    }
-    fetchApi();
-  },[]);
-  return { error, data, isLoading };
+      fetchApi();
+      return () => controller.abort();
+    },
+
+    [url]
+  );
+  return { error, movies, isLoading };
 }

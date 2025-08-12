@@ -1,11 +1,13 @@
-import { useWatchedMovieContext } from "./useWatchedMoviesContext";
+import { useWatchListMoviesContext } from "./useWatchedMoviesContext";
 
-export default function useWatchedMovies(title, id, runtime) {
-  const { handleWatchedMovie, watchedMovie } = useWatchedMovieContext();
-  function setIsWatchedMovie() {
-    handleWatchedMovie({ title, id , runtime});
+export default function useWatchListMovies(title, id) {
+  const { handleWatchListMovies, watchListMovies } =
+    useWatchListMoviesContext();
+  function setWatchListMovies() {
+    handleWatchListMovies({ title, id });
   }
-  const isWatched = watchedMovie.map(({ id }) => id).includes(id) || false;
+  const iswatchListMovies =
+    watchListMovies.map(({ id }) => id).includes(id) || false;
 
-  return {isWatched, setIsWatchedMovie, watchedMovie};
+  return { iswatchListMovies, setWatchListMovies, watchListMovies };
 }

@@ -1,8 +1,8 @@
+import { ApiKey } from "../../api";
 import RenderMovies from "../../components/movieRenderer";
-import { fetchMoviesByGenry } from "../../api";
-import useMoviesFetch from "../../hooks/useMoviesFetch";
+import useFetch from "../../hooks/useFetch";
 
 export default function ActionMovies() {
-  const [movies] = useMoviesFetch(() => fetchMoviesByGenry(28, 3));
+   const { movies } = useFetch(`https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&with_genres=28&page=3`)
   return <RenderMovies moviesResults={movies} title="Action" />;
 }
