@@ -1,11 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext,  useState } from "react";
+import useLocalStorageState from "../hooks/useLocalStorageState";
 
 const SelectedMovieDetailContext = createContext();
 const ActiveTabContext = createContext();
 const WatchListMoviesContext = createContext();
 
 function WatchedMovieProvider({ children }) {
-  const [watchListMovies, setWatchListMovies] = useState([]);
+  const [watchListMovies, setWatchListMovies] = useLocalStorageState(
+    [],
+    "watchLists"
+  );
   function handleWatchListMovies(movie) {
     setWatchListMovies((prev) => [...prev, movie]);
   }

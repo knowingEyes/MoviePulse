@@ -29,7 +29,7 @@ export default function HeroBanner() {
           </Button>
           {!iswatchListMovies ? (
             <Button bg="bg-white/20" handleClick={setWatchListMovies}>
-              <FaPlus /> Add to watch list.
+              <FaPlus /> Add to watch list
             </Button>
           ) : (
             <Button bg="bg-white/20">

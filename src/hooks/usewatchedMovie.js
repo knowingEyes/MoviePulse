@@ -7,7 +7,7 @@ export default function useWatchListMovies(title, id) {
     handleWatchListMovies({ title, id });
   }
   const iswatchListMovies =
-    watchListMovies.map(({ id }) => id).includes(id) || false;
+    watchListMovies?.map(({ id }) => id).includes(id) || false;
 
   return { iswatchListMovies, setWatchListMovies, watchListMovies };
 }

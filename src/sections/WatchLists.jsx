@@ -19,7 +19,7 @@ function WatchList() {
     [watchListMovies]
   );
   return (
-    <div className="bg-[#080808] text-white fixed inset-0 overflow-y-auto">
+    <div className="bg-[#080808] text-white fixed inset-0 overflow-y-auto [&_ul]:mx-2">
       <header className="bg-[#0a0a0a] p-4 flex justify-between">
         <h1 className="text-white font-bold text-lg">Watch Later</h1>
         <p></p>

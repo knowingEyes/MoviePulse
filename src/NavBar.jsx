@@ -6,25 +6,25 @@ export default function NavBar() {
   const { handleActiveTab } = useActiveTabContext();
   return (
     <nav
-      className="bg-gradient-to-t from-[#141414] to-transparent text-white z-40
-       fixed w-full bottom-0 p-3"
+      className="backdrop-blur-md bg-black/40 shadow-lg shadow-black/50  to-transparent text-white z-40 
+       fixed w-full bottom-0 p-3 pb-4 "
     >
       <ul className="flex justify-between  items-end [&_button]:cursor-pointer">
         <li>
           <button onClick={() => handleActiveTab("Home")}>
             {" "}
-            <FiHome />
+            <FiHome  className="text-[1.15rem]"/>
           </button>
         </li>
         <li>
           <button onClick={() => handleActiveTab("Search")}>
-            <FiSearch />
+            <FiSearch className="text-[1.15rem]" />
           </button>
         </li>
         <li>
           <button onClick={() => handleActiveTab("Watchlist")}>
             {" "}
-            <FiBookmark />
+            <FiBookmark className="text-[1.15rem]"/>
           </button>
           <p></p>
         </li>

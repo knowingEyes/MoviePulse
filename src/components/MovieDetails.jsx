@@ -99,7 +99,7 @@ export default function MovieDetailsModal() {
                   maxLength={10}
                   // defaultRating={yourRating}
                   setYourRating={handleYourRating}
-                />: <p className="flex items-center font-bold gap-1">You rated this movie {yourRating.current[id]} <FaStar className="text-yellow-400"/></p>}
+                />: <p className="flex items-center font-bold gap-1 text-sm">You rated this movie {yourRating.current[id]} <FaStar className="text-yellow-400"/></p>}
               </div>
             </div>
             <p className="text-gray-300 text-sm my-5">{overview}</p>

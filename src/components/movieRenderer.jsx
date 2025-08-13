@@ -74,6 +74,7 @@ export function RenderMoviesVertical({ movies, secTitle }) {
                 src={`https://image.tmdb.org/t/p/original${poster_path}`}
                 alt=""
                 className="w-20 rounde-md rounded-md"
+                loading="lazy"
               />
               <div>
                 <h2 className="text-sm font-bold">{title}</h2>

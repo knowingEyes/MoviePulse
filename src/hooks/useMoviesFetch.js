@@ -9,6 +9,5 @@ export default function useMoviesFetch(callback) {
     }
     getMovies();
   }, []);
-
   return [movies];
 }
