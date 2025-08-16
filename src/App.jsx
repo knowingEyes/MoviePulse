@@ -3,25 +3,25 @@ import HeroBanner from "./HeroBanner";
 import Header from "./components/AppHeader";
 import {
   ActiveTabProvider,
-  MovieProvider,
+  SelectedMovieProvider,
   WatchedMovieProvider,
 } from "./context/AppContext";
 
 import MovieDetailsModal from "./components/MovieDetails";
 import AllSections from "./sections/AllSections";
-import LoaderSkelenton from "./components/Loader";
+
 function App() {
   return (
     <div className="font-sans w-full">
       <WatchedMovieProvider>
         <ActiveTabProvider>
-          <MovieProvider>
+          <SelectedMovieProvider>
             <Header />
             <HeroBanner />
             <MovieDetailsModal />
             <AllSections />
             <NavBar />
-          </MovieProvider>
+          </SelectedMovieProvider>
         </ActiveTabProvider>
       </WatchedMovieProvider>
     </div>

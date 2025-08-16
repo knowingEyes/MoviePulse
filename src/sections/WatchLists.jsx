@@ -3,9 +3,8 @@ import { RenderMoviesVertical } from "../components/movieRenderer";
 import { fetchMoviesByCategory } from "../api";
 import useWatchListMovies from "../hooks/usewatchedMovie";
 function WatchList() {
-  const { watchListMovies } = useWatchListMovies();
+  const { watchListMovies, handleDelete } = useWatchListMovies();
   const [watchedMoviesResults, setwatchedMoviesResults] = useState([]);
-
   useEffect(
     function () {
       async function getWatchedMovies() {
@@ -24,7 +23,9 @@ function WatchList() {
         <h1 className="text-white font-bold text-lg">Watch Later</h1>
         <p></p>
       </header>
-      <RenderMoviesVertical movies={watchedMoviesResults} />
+      <RenderMoviesVertical movies={watchedMoviesResults} handleDelete={handleDelete}/>
+        
+        
     </div>
   );
 }

@@ -8,10 +8,17 @@ import Button from "./Button";
 import useFetch from "../hooks/useFetch";
 import LoaderSkelenton from "./Loader";
 import useWatchListMovies from "../hooks/usewatchedMovie";
-import {useRef} from "react";
+
+import { useActiveTabContext } from "../hooks/useActiveTabContext";
+import useLocalStorageState from "../hooks/useLocalStorageState";
+import { useState } from "react";
 
 export default function MovieDetailsModal() {
-  const yourRating = useRef({});
+  const { handleActiveTab, activeTab } = useActiveTabContext();
+  const [clampText, setClampText] = useState(true);
+  const [yourRating, setValue] = useLocalStorageState({}, "ratings", {
+    render: false,
+  });
   const { selectedMovieId, handleSelect } = useSelectedMovieContext();
   const { isLoading, movies: movie } = useFetch(
     `https://api.themoviedb.org/3/movie/${selectedMovieId}?api_key=${ApiKey}`
@@ -37,16 +44,22 @@ export default function MovieDetailsModal() {
     (r) => r?.type === "Trailer" && r?.site === "YouTube"
   )?.key;
   function handleYourRating(rating) {
-   yourRating.current[id] = rating
+    setValue((yourRating.current[id] = rating));
   }
-  
-  
+  // function navigate() {
+  //   handleSelect(null)
+  //   handleActiveTab(activeTab)
+  // }
+
+  // const truncate = (text, num = 150)=> {
+  //   if(text.length < 50) {
+  //     text.split(" ").splice
+  //   }
+  // }
   return (
     <>
       {selectedMovieId && !isLoading ? (
-        <section
-          className="bg-[#141414] fixed  text- z-50 text-white overflow-auto inset-0"
-        >
+        <section className="bg-[#141414] fixed  text- z-90 text-white overflow-auto inset-0">
           <div className="relative">
             <iframe
               src={`https://www.youtube.com/embed/${selectedMovieTrailerKey}`}
@@ -56,10 +69,10 @@ export default function MovieDetailsModal() {
             />
             <iframe />
             <button
-              className="text-white text-2xl absolute top-2.5 left-2 cursor-pointer"
+              className="text-white text-2xl absolute top-3 left-5 cursor-pointer"
               onClick={() => handleSelect(null)}
             >
-              <FiArrowLeft />
+              <FiArrowLeft className="bg-black/70 rounded" />
             </button>
           </div>
           <div className="p-4 mt-31">
@@ -93,16 +106,35 @@ export default function MovieDetailsModal() {
                 </Button>
               )}
               <div className="rounded-xl py-3 bg-white/5 flex justify-center h-10">
-                {!yourRating.current[id] ?<Stars
-                  size="text-[18px]"
-                  color="text-yellow-400 "
-                  maxLength={10}
-                  // defaultRating={yourRating}
-                  setYourRating={handleYourRating}
-                />: <p className="flex items-center font-bold gap-1 text-sm">You rated this movie {yourRating.current[id]} <FaStar className="text-yellow-400"/></p>}
+                {!yourRating.current[id] ? (
+                  <Stars
+                    size="text-[18px]"
+                    color="text-yellow-400 "
+                    maxLength={10}
+                    // defaultRating={yourRating}
+                    setYourRating={handleYourRating}
+                  />
+                ) : (
+                  <p className="flex items-center font-bold gap-1 text-sm">
+                    You rated this movie {yourRating.current[id]}{" "}
+                    <FaStar className="text-yellow-400" />
+                  </p>
+                )}
               </div>
             </div>
-            <p className="text-gray-300 text-sm my-5">{overview}</p>
+            <p className="text-gray-200 text-sm my-5 inline">
+              {clampText && overview?.length >= 150
+                ? overview?.slice(0, 150) + " ... "
+                : overview}
+            </p>
+            {overview?.length >= 150 && (
+              <button
+                onClick={() => setClampText((p) => !p)}
+                className="text-sm text-gray-100"
+              >
+                {clampText ? "showmore" : "showless"}
+              </button>
+            )}
             <MightAlsoLike genre={genres?.[0]?.id ?? 28} />
           </div>
         </section>

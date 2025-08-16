@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchInput from "../components/SearchInput";
 import { useActiveTabContext } from "../hooks/useActiveTabContext";
 import RecommendedMovies from "./core/Recommeded";
@@ -15,9 +15,12 @@ function SearchForMovies() {
       ? null
       : `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&query=${query}&page=1`
   );
+  useEffect(function() {
+    
+  })
   return (
-    <div className="fixed z-50 bg-[#080808] text-white overflow-y-scroll p-3 w-full inset-0">
-      <header>
+    <div className="fixed z-50 bg-[#080808] text-white overflow-y-scroll w-full inset-0">
+      <header className="fixed w-full top-0 z-90  bg-[#080808]  left-0 p-3">
         <SearchInput
           query={query}
           setQuery={(val) => setQuery(val)}
@@ -25,7 +28,7 @@ function SearchForMovies() {
         />
       </header>
 
-      <div className="pt-20">
+      <div className="pt-20 px-4">
         {query.length < 3 ? (
           <>
             <TodayPicksMovies />

@@ -13,14 +13,20 @@ function WatchedMovieProvider({ children }) {
   function handleWatchListMovies(movie) {
     setWatchListMovies((prev) => [...prev, movie]);
   }
+
+  function handleDelete(id, e) {
+      e.stopPropagation()
+     setWatchListMovies(watchListMovies.filter(m=> m.id !== id))
+  }
+
   return (
-    <WatchListMoviesContext value={{ handleWatchListMovies, watchListMovies }}>
+    <WatchListMoviesContext value={{ handleWatchListMovies, watchListMovies, handleDelete }}>
       {children}
     </WatchListMoviesContext>
   );
 }
 
-function MovieProvider({ children }) {
+function SelectedMovieProvider({ children }) {
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   function handleSelect(id) {
     setSelectedMovieId(id);
@@ -48,7 +54,7 @@ function ActiveTabProvider({ children }) {
 }
 
 export {
-  MovieProvider,
+  SelectedMovieProvider,
   ActiveTabProvider,
   WatchedMovieProvider,
   WatchListMoviesContext,
