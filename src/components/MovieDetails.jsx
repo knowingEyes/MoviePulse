@@ -59,7 +59,8 @@ export default function MovieDetailsModal() {
   return (
     <>
       {selectedMovieId && !isLoading ? (
-        <section className="bg-[#141414] fixed  text- z-90 text-white overflow-auto inset-0">
+        <section className="bg-[#080808] fixed  text- z-90 text-white
+         overflow-y-auto inset-0 overflow-x-hidden">
           <div className="relative">
             <iframe
               src={`https://www.youtube.com/embed/${selectedMovieTrailerKey}`}
@@ -89,7 +90,7 @@ export default function MovieDetailsModal() {
                 </div>
                 <div>
                   <FaStar className="text-yellow-400" />
-                  <span>{Number(rating).toFixed(2)} ratings</span>
+                  <span>{Number(rating).toFixed(2) || 0} ratings</span>
                 </div>
               </div>
               <p className="text-sm text-gray-400">Genre : {allgenres}</p>
@@ -122,15 +123,16 @@ export default function MovieDetailsModal() {
                 )}
               </div>
             </div>
-            <p className="text-gray-200 text-sm my-5 inline">
+            <p className="text-gray-200 text-sm my-5 inline-block">
               {clampText && overview?.length >= 150
-                ? overview?.slice(0, 150) + " ... "
+                ? overview?.slice(0, 150) + ".. "
                 : overview}
             </p>
             {overview?.length >= 150 && (
               <button
                 onClick={() => setClampText((p) => !p)}
-                className="text-sm text-gray-100"
+                className="text-[16px] text-white cursor-pointer"
+
               >
                 {clampText ? "showmore" : "showless"}
               </button>
