@@ -4,14 +4,13 @@ import { useSelectedMovieContext } from "../hooks/useSelectedMovieContext";
 import { FaTimes } from "../utils/iconsLib";
 import { useState } from "react";
 
-export function RenderMovies({ moviesResults, title, wrap = "" }) {
-  const { handleSelect, selectedMovieId } = useSelectedMovieContext();
+export function RenderMovies({ moviesResults, title, wrap = "" , clas}) {
+  const { handleSelect } = useSelectedMovieContext();
   const [isHoverId, setIsHoverId] = useState(null)
-
   const baseImdbUrl = `https://image.tmdb.org/t/p/original`;
   return (
-    <section className="mb-5">
-      <h1 className="text-white font-bold mb-2 text-lg">{title}</h1>
+    <section className="mb-5 top-results:bg-green-100">
+      <h1 className={`text-white font-bold mb-2 text-lg ${clas && "text-center"}`}>{title}</h1>
       <ul
         className={`flex  ${wrap} gap-2 overflow-x-auto  items-center  [&::-webkit-scrollbar]:bg-transparent relative 
       [&::-webkit-scrollbar-thumb]:bg-[rgba(255,255,255,0.1)] [&::-webkit-scrollbar]:w-[6px]
@@ -56,10 +55,6 @@ export function RenderMovies({ moviesResults, title, wrap = "" }) {
 export function RenderMoviesVertical({ movies, secTitle, handleDelete }) {
   const { handleSelect, selectedMovieId } = useSelectedMovieContext();
   const { activeTab } = useActiveTabContext();
-  // function handleTabSwitchAndSelect(id) {
-
-  //   // handleActiveTab("Home");
-  // }
   return (
     <section>
       <h1 className="font-bold text-lg">{secTitle}</h1>

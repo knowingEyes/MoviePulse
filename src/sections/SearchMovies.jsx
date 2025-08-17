@@ -19,7 +19,7 @@ function SearchForMovies() {
     
   })
   return (
-    <div className="fixed z-50 bg-[#080808] text-white overflow-y-scroll w-full inset-0">
+    <div className="fixed z-50 bg-[#080808] text-white overflow-y-scroll w-full inset-0 ">
       <header className="fixed w-full top-0 z-90  bg-[#080808]  left-0 p-3">
         <SearchInput
           query={query}
@@ -41,6 +41,7 @@ function SearchForMovies() {
             moviesResults={movies}
             title="Top matches"
             wrap="flex-wrap justify-center"
+            clas="top-results"
           />
         )}
         {query.length > 3 && !movies.length && !isLoading && (
