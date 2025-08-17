@@ -2,19 +2,20 @@ import { useEffect, useMemo, useState } from "react";
 import { RenderMoviesVertical } from "../components/movieRenderer";
 import { fetchMoviesByCategory } from "../api";
 import useWatchListMovies from "../hooks/usewatchedMovie";
+import useLocalStorageState from "../hooks/useLocalStorageState";
 function WatchList() {
   const { watchListMovies, handleDelete } = useWatchListMovies();
   const [watchedMoviesResults, setwatchedMoviesResults] = useState([]);
-  const [sortBy, setSortBy] = useState("added");
+  const [sortBy, setSortBy] = useLocalStorageState("added", "sort");
   let sortedMovies = useMemo(() => {
     if (sortBy === "release") {
       return watchedMoviesResults.sort(
         (a, b) => +a?.release_date?.localeCompare(+b?.release_date)
       );
     }
-     if (sortBy === "added") {
-      return watchedMoviesResults.sort(
-        (a, b) => a?.dateAdded?.localeCompare(b?.dateAdded)
+    if (sortBy === "added") {
+      return watchedMoviesResults.sort((a, b) =>
+        a?.dateAdded?.localeCompare(b?.dateAdded)
       );
     }
     if (sortBy === "alphabet") {

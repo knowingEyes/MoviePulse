@@ -10,7 +10,7 @@ export function RenderMovies({ moviesResults, title, wrap = "" , clas}) {
   const baseImdbUrl = `https://image.tmdb.org/t/p/original`;
   return (
     <section className="mb-5 top-results:bg-green-100">
-      <h1 className={`text-white font-bold mb-2 text-lg ${clas && "text-center"}`}>{title}</h1>
+      <h1 className={`text-white font-bold mb-3 text-lg ${clas && "text-center"}`}>{title}</h1>
       <ul
         className={`flex  ${wrap} gap-2 overflow-x-auto  items-center  [&::-webkit-scrollbar]:bg-transparent relative 
       [&::-webkit-scrollbar-thumb]:bg-[rgba(255,255,255,0.1)] [&::-webkit-scrollbar]:w-[6px]
