@@ -25,15 +25,15 @@ export default function HeroBanner() {
         <p className="text-sm text-gray-300 "> {release_date}</p>
         <div className="flex justify-center gap-3 mt-5">
           <Button handleClick={() => handleSelect(id)}>
-            <FaPlay /> Watch Trailer
+            <FaPlay /> <span className="text-[0.75rem]">Watch Trailer</span>
           </Button>
           {!iswatchListMovies ? (
             <Button bg="bg-white/20" handleClick={setWatchListMovies}>
-              <FaPlus /> Add to watch list
+              <FaPlus /> <span className="text-[0.75rem]">Add to Watchlist</span>
             </Button>
           ) : (
             <Button bg="bg-white/20">
-              Added to Watchlist
+              <span className="text-[0.75rem]">Added to Watchlist</span>
               <FiCheck size={"18px"} />
             </Button>
           )}

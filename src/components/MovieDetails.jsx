@@ -102,7 +102,7 @@ export default function MovieDetailsModal() {
                 </Button>
               ) : (
                 <Button>
-                  Added to WatchList
+                  Added to Watchlist
                   <FiCheck size={"20px"} />
                 </Button>
               )}
