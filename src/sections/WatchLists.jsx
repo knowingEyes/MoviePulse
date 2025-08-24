@@ -7,15 +7,27 @@ import { FaFilm } from "react-icons/fa";
 function WatchList() {
   const { watchListMovies, handleDelete } = useWatchListMovies();
   const [watchedMoviesResults, setwatchedMoviesResults] = useState([]);
-  const [sortBy, setSortBy] = useLocalStorageState("added", "sort");
+  const [sortBy, setSortBy] = useLocalStorageState("title", "sort");
+
   let sortedMovies = useMemo(() => {
     if (sortBy === "release") {
       return watchedMoviesResults.sort(
-        (a, b) => a?.release_date < b?.release_date
+        (a, b) => new Date(b?.release_date) - new Date(a?.release_date)
       );
     }
     if (sortBy === "added") {
-      return watchedMoviesResults.sort((a, b) => a?.dateAdded < b?.dateAdded);
+      const dateAddedLookUp = watchListMovies.reduce((acc, c) => {
+        acc[c.id] = c.dateAdded;
+        return acc;
+      }, {});
+
+      const modified = watchedMoviesResults.map((m) => {
+        return { ...m, dateAdded: dateAddedLookUp[m.id] };
+      });
+
+      return modified.sort(
+        (a, b) => new Date(a.dateAdded) - new Date(b.dateAdded)
+      );
     }
     if (sortBy === "alphabet") {
       return watchedMoviesResults.sort((a, b) =>
@@ -24,7 +36,7 @@ function WatchList() {
     }
     if (sortBy === "rating") {
       return watchedMoviesResults.sort(
-        (a, b) => Number(b?.vote_average) - Number(a?.vote_average)
+        (a, b) => b?.vote_average - +a?.vote_average
       );
     } else {
       return watchedMoviesResults;
