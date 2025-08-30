@@ -1,28 +1,24 @@
-import NavBar from "./NavBar";
-import HeroBanner from "./HeroBanner";
-import Header from "./components/AppHeader";
-import {
-  ActiveTabProvider,
-  SelectedMovieProvider,
-  WatchedMovieProvider,
-} from "./context/AppContext";
-
+import { WatchedMovieProvider } from "./context/AppContext";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { HomePage } from "./components/HomePage";
+import SearchForMovies from "./sections/SearchMovies";
+import WatchList from "./sections/WatchLists";
+import { AppLayout } from "./components/AppLayout";
 import MovieDetailsModal from "./components/MovieDetails";
-import AllSections from "./sections/AllSections";
 
 function App() {
   return (
     <div className="font-sans w-full">
       <WatchedMovieProvider>
-        <ActiveTabProvider>
-          <SelectedMovieProvider>
-            <Header />
-            <HeroBanner />
-            <MovieDetailsModal />
-            <AllSections />
-            <NavBar />
-          </SelectedMovieProvider>
-        </ActiveTabProvider>
+        <Routes>
+          <Route path="/" element={<AppLayout />}>
+            <Route index element={<Navigate to="homepage" replace />} />
+            <Route path="homepage" element={<HomePage />} />
+            <Route path="watchlists" element={<WatchList />} />
+          </Route>
+          <Route path="searchmovies" element={<SearchForMovies />} />
+          <Route path="movie/:id" element={<MovieDetailsModal />} />
+        </Routes>
       </WatchedMovieProvider>
     </div>
   );

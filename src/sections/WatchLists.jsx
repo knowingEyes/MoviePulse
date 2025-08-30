@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { RenderMoviesVertical } from "../components/movieRenderer";
 import { fetchMoviesByCategory } from "../api";
-import useWatchListMovies from "../hooks/usewatchedMovie";
 import useLocalStorageState from "../hooks/useLocalStorageState";
 import { FaFilm } from "react-icons/fa";
+import { useWatchListMoviesContext } from "../hooks/useWatchedMoviesContext";
 function WatchList() {
-  const { watchListMovies, handleDelete } = useWatchListMovies();
+  const { watchListMovies, handleDelete } = useWatchListMoviesContext();
   const [watchedMoviesResults, setwatchedMoviesResults] = useState([]);
-  const [sortBy, setSortBy] = useLocalStorageState("title", "sort");
-
+  const [sortBy, setSortBy] = useLocalStorageState("title", "sort"); 
   let sortedMovies = useMemo(() => {
     if (sortBy === "release") {
       return watchedMoviesResults.sort(
@@ -80,6 +79,7 @@ function WatchList() {
           <RenderMoviesVertical
             movies={sortedMovies}
             handleDelete={handleDelete}
+            delBtn={{delBtn : true}}
           />
         </>
       ) : (

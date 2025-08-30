@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "../utils/iconsLib";
 
-function SearchInput({ setQuery, query, customStyles, handleClick }) {
+function SearchInput({ setQuery, query, customStyles }) {
+    const navigate = useNavigate()
   return (
     <div className="flex text-white items-center z-50 gap-3">
-      <button className="cursor-pointer" onClick={handleClick}>
+      <button className="cursor-pointer" onClick={()=> navigate(-1)}>
         <FiArrowLeft className="text-xl" />
       </button>
       <input

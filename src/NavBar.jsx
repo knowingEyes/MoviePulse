@@ -1,9 +1,7 @@
-
-import { FiSearch, FiHome, FiBookmark, FiPlusSquare } from "./utils/iconsLib";
-import { useActiveTabContext } from "./hooks/useActiveTabContext";
+import { FiSearch, FiHome, FiBookmark } from "./utils/iconsLib";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
-  const { handleActiveTab } = useActiveTabContext();
   return (
     <nav
       className="backdrop-blur-md bg-[#080808]/80 shadow-lg shadow-black/50  to-transparent text-white z-40 
@@ -11,21 +9,21 @@ export default function NavBar() {
     >
       <ul className="flex justify-between  items-end [&_button]:cursor-pointer">
         <li>
-          <button onClick={() => handleActiveTab("Home")}>
+          <NavLink to="homepage">
             {" "}
-            <FiHome  className="text-[1.15rem]"/>
-          </button>
+            <FiHome className="text-[1.15rem]" />
+          </NavLink>
         </li>
         <li>
-          <button onClick={() => handleActiveTab("Search")}>
+          <NavLink to="searchmovies">
             <FiSearch className="text-[1.15rem]" />
-          </button>
+          </NavLink>
         </li>
         <li>
-          <button onClick={() => handleActiveTab("Watchlist")}>
+          <NavLink to="watchlists">
             {" "}
-            <FiBookmark className="text-[1.15rem]"/>
-          </button>
+            <FiBookmark className="text-[1.15rem]" />
+          </NavLink>
           <p></p>
         </li>
       </ul>
